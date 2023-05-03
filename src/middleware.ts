@@ -5,16 +5,20 @@ import { getUserBySessionToken } from './db/user';
 
 export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const sessionToken = req.cookies['ANTONIO-AUTH'];
+    const rsp = {
+        code: 403,
+        msg: "Not Authenticated"
+    }
+    const sessionToken = req.cookies['WATERBNB-AUTH'];
 
     if (!sessionToken) {
-      return res.sendStatus(403);
+      return res.send(rsp);
     }
 
     const existingUser = await getUserBySessionToken(sessionToken);
 
     if (!existingUser) {
-      return res.sendStatus(403);
+      return res.send(rsp);
     }
 
     merge(req, { identity: existingUser });

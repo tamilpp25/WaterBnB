@@ -47,7 +47,7 @@ export const login = async (req: Request, res: Response) => {
     await user.save();
 
     //@ts-ignore
-    res.cookie('ANTONIO-AUTH', user.authentication.sessionToken, { domain: 'localhost', path: '/' });
+    res.cookie('WATERBNB-AUTH', user.authentication.sessionToken, { domain: 'localhost', path: '/' });
 
     return res.send(rsp);
   } catch (error) {
